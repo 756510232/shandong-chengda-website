@@ -1471,9 +1471,23 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 ::-webkit-scrollbar-thumb:hover { background: var(--c-gold); }
 
 /* ---------- 留资表单：页面核心，整宽居中、清晰可填 ---------- */
+/* 留资核心区：表单与下方 4 个信息块共用同一居中宽度 */
+.contact-page {
+  max-width: 1080px;
+  margin: 0 auto;
+}
 .contact-form-block {
-  max-width: 880px;
-  margin: 0 auto var(--sp-2xl);
+  max-width: 100%;
+  margin: 0 0 var(--sp-2xl);
+}
+.contact-info {
+  margin-top: var(--sp-md);
+}
+.contact-info-lead {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-lg);
 }
 .form-embed-wrap {
   padding: var(--sp-lg);
@@ -1531,20 +1545,88 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   display: block;
 }
 
-/* ---------- 补充信息（地图/到访须知/紧急联系） ---------- */
-.contact-secondary {
+/* ---------- 服务支持（到访须知 + 紧急联系） ---------- */
+.contact-support {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-xl);
-  align-items: start;
+  align-items: stretch;
+  margin-top: var(--sp-xl);
+}
+.support-card {
+  padding: var(--sp-xl);
+  height: 100%;
+}
+.support-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+.support-title::before {
+  content: "";
+  width: 4px;
+  height: 1.1em;
+  border-radius: 4px;
+  background: var(--c-gold);
+}
+.support-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+.support-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: var(--fs-sm);
+  color: var(--text-body);
+  line-height: 1.7;
+}
+.support-list li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--c-gold);
+  font-weight: 700;
+}
+.support-emergency {
+  background: var(--grad-primary);
+  color: #fff;
+  border: none;
+}
+.support-emergency .support-title {
+  color: #fff;
+}
+.support-emergency .support-title::before {
+  background: var(--c-gold);
+}
+.support-desc {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  margin-bottom: var(--sp-lg);
+}
+.support-phone {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--c-gold);
+  letter-spacing: 0.03em;
+}
+.support-note {
+  margin-top: var(--sp-lg);
+  padding-top: var(--sp-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.6);
 }
 
-@media (max-width: 900px) {
-  .contact-secondary { grid-template-columns: 1fr; }
-}
 @media (max-width: 768px) {
   .wps-form-embed { height: 860px; }
   .contact-form-block { margin-bottom: var(--sp-xl); }
+  .contact-support { grid-template-columns: 1fr; gap: var(--sp-lg); }
 }
 
 /* ---------- 职位说明 / 专家卡片 ---------- */

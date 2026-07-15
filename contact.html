@@ -45,130 +45,97 @@
     <a href="contact.html" class="nav-link">联系我们</a>
   </div>
 
-  <!-- ===== 页面 Hero ===== -->
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero-content">
-        <h1>联系我们</h1>
-        <p>随时与我们取得联系，专业顾问为您服务</p>
-        <div class="breadcrumb">
-          <a href="index.html">首页</a> <span>/</span> <span>联系我们</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 联系信息卡片 ===== -->
+  <!-- ===== 留资表单（页面核心，置顶） ===== -->
   <section class="section">
     <div class="container">
-      <div class="contact-info-grid" data-animate>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📞</div>
-          <div>
-            <div class="contact-info-label">咨询热线</div>
-            <div class="contact-info-value">400-888-XXXX</div>
-          </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">✉</div>
-          <div>
-            <div class="contact-info-label">电子邮箱</div>
-            <div class="contact-info-value">service@chengda-tech.com</div>
-          </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📍</div>
-          <div>
-            <div class="contact-info-label">公司地址</div>
-            <div class="contact-info-value">山东省济南市XX区<br>XX路XX号诚达大厦</div>
-          </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">🕐</div>
-          <div>
-            <div class="contact-info-label">营业时间</div>
-            <div class="contact-info-value">周一至周日<br>8:30 - 18:00</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="contact-page">
 
-  <!-- ===== 在线留资（页面核心） ===== -->
-  <section class="section bg-section">
-    <div class="container">
+        <!-- 表单：居中、整宽、直接可见、清晰可填 -->
+        <div class="contact-form-block" data-animate>
+          <div class="text-center form-intro">
+            <h2 class="section-title">提交您的咨询</h2>
+            <p class="section-subtitle">填写以下信息，专属顾问将在 30 分钟内与您联系，信息全程严格保密</p>
+          </div>
 
-      <!-- 留资表单：整页核心，整宽居中、直接可见、清晰可填 -->
-      <div class="contact-form-block" data-animate>
-        <div class="text-center" style="margin-bottom:var(--sp-lg);">
-          <span class="eyebrow">在线留资</span>
-          <h2 class="section-title">提交您的咨询</h2>
-          <p class="section-subtitle">填写以下信息，专属顾问将在 30 分钟内与您联系，信息全程严格保密</p>
+          <div class="form-embed-wrap glass-card">
+            <div class="form-embed-head">
+              <div class="form-embed-badge">🔒 信息加密 · 严格保密</div>
+              <h3 class="form-embed-title">网站留资 · 收集表</h3>
+              <p class="form-embed-tip">请在下方完整填写，带 <span style="color:var(--c-gold);font-weight:700;">*</span> 为必填项，填完点底部「提交」即可</p>
+            </div>
+            <div class="wps-form-embed">
+              <iframe src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
+            </div>
+            <p class="form-embed-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
+          </div>
         </div>
 
-        <div class="form-embed-wrap glass-card">
-          <div class="form-embed-head">
-            <div class="form-embed-badge">🔒 信息加密 · 严格保密</div>
-            <h3 class="form-embed-title">网站留资 · 收集表</h3>
-            <p class="form-embed-tip">请在下方完整填写，带 <span style="color:var(--c-gold);font-weight:700;">*</span> 为必填项，填完点底部「提交」即可</p>
-          </div>
-          <div class="wps-form-embed">
-            <iframe src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
-          </div>
-          <p class="form-embed-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
-        </div>
-      </div>
-
-      <!-- 地图 & 补充信息（退为次要内容） -->
-      <div class="contact-secondary">
-        <div data-animate>
-          <div class="card" style="padding:0;overflow:hidden;margin-bottom:var(--sp-md);">
-            <div style="width:100%;height:320px;background:var(--grad-hero);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--sp-sm);position:relative;">
-              <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-size:3rem;margin-bottom:var(--sp-sm);">📍</div>
-                <div style="color:#fff;font-size:var(--fs-lg);font-weight:700;">山东诚达信息科技有限公司</div>
-                <div style="color:rgba(255,255,255,0.6);font-size:var(--fs-sm);margin-top:var(--sp-xs);">山东省济南市XX区XX路XX号</div>
+        <!-- 联系方式（4 个信息块，与表单同宽） -->
+        <div class="contact-info" data-animate>
+          <p class="contact-info-lead">您也可以直接通过以下方式联系我们</p>
+          <div class="contact-info-grid">
+            <div class="contact-info-item">
+              <div class="contact-info-icon">📞</div>
+              <div>
+                <div class="contact-info-label">咨询热线</div>
+                <div class="contact-info-value">400-888-XXXX</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">✉</div>
+              <div>
+                <div class="contact-info-label">电子邮箱</div>
+                <div class="contact-info-value">service@chengda-tech.com</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">📍</div>
+              <div>
+                <div class="contact-info-label">公司地址</div>
+                <div class="contact-info-value">山东省济南市XX区<br>XX路XX号诚达大厦</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">🕐</div>
+              <div>
+                <div class="contact-info-label">营业时间</div>
+                <div class="contact-info-value">周一至周日<br>8:30 - 18:00</div>
               </div>
             </div>
           </div>
-
-          <div class="glass-card">
-            <h3 style="font-size:var(--fs-lg);font-weight:700;color:var(--text-primary);margin-bottom:var(--sp-md);">到访须知</h3>
-            <ul style="display:flex;flex-direction:column;gap:var(--sp-sm);">
-              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
-                <span style="color:var(--c-gold);font-weight:700;">·</span>
-                建议提前电话预约，以便安排专属顾问接待
-              </li>
-              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
-                <span style="color:var(--c-gold);font-weight:700;">·</span>
-                到访办理请携带身份证、行驶证、车辆登记证
-              </li>
-              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
-                <span style="color:var(--c-gold);font-weight:700;">·</span>
-                市区内可提供免费上门评估服务
-              </li>
-              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
-                <span style="color:var(--c-gold);font-weight:700;">·</span>
-                提供免费停车位，方便驾车到访
-              </li>
-            </ul>
-          </div>
         </div>
 
-        <div data-animate data-animate-delay="1">
-          <div class="card" style="background:var(--grad-primary);color:#fff;border:none;height:100%;">
-            <h3 style="font-size:var(--fs-lg);font-weight:700;margin-bottom:var(--sp-sm);">紧急联系</h3>
-            <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);margin-bottom:var(--sp-md);">非营业时间如有紧急需求，请拨打24小时服务热线</p>
-            <div style="font-size:var(--fs-2xl);font-weight:800;color:var(--c-gold);letter-spacing:0.03em;">400-888-XXXX</div>
-            <div style="margin-top:var(--sp-lg);padding-top:var(--sp-lg);border-top:1px solid rgba(255,255,255,0.15);">
-              <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);margin-bottom:var(--sp-xs);">服务时间</p>
-              <p style="font-size:var(--fs-base);color:#fff;font-weight:600;">周一至周日 8:30 - 18:00</p>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 服务支持（到访须知 + 紧急联系） ===== -->
+  <section class="section bg-section">
+    <div class="container">
+      <div class="text-center" data-animate>
+        <span class="eyebrow">服务支持</span>
+        <h2 class="section-title">到访与应急</h2>
+        <p class="section-subtitle">到访办理前的小提示，以及非营业时段的应急联系方式</p>
       </div>
 
+      <div class="contact-support" data-animate>
+        <div class="glass-card support-card">
+          <h3 class="support-title">到访须知</h3>
+          <ul class="support-list">
+            <li>建议提前电话预约，以便安排专属顾问接待</li>
+            <li>到访办理请携带身份证、行驶证、车辆登记证</li>
+            <li>市区内可提供免费上门评估服务</li>
+            <li>提供免费停车位，方便驾车到访</li>
+          </ul>
+        </div>
+
+        <div class="card support-card support-emergency">
+          <h3 class="support-title">紧急联系</h3>
+          <p class="support-desc">非营业时间如有紧急需求，可随时拨打 24 小时服务热线，我们将第一时间响应。</p>
+          <div class="support-phone">400-888-XXXX</div>
+          <p class="support-note">日常咨询请于营业时间（周一至周日 8:30-18:00）拨打上方热线</p>
+        </div>
+      </div>
     </div>
   </section>
 
