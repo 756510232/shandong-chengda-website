@@ -103,21 +103,31 @@
         <div data-animate>
           <span class="eyebrow">在线留言</span>
           <h2 class="section-title" style="margin-bottom:var(--sp-sm)">提交您的咨询</h2>
-          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">请在下方表单中填写您的真实信息，我们的专属顾问会尽快与您联系。表单字段以页面内所示为准。</p>
+          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">点击下方按钮，在我们的页面内安全填写留资表单，专属顾问将在第一时间与您联系。</p>
 
-          <!-- WPS 表单嵌入：访客在站内直接填写，数据进入 WPS 表格后台 -->
-          <div class="wps-form-embed">
-            <iframe
-              src="https://f.kdocs.cn/g/QrfVAqFo/"
-              title="网站留资-收集表"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              frameborder="0"></iframe>
+          <!-- 引导卡片：网站自有风格，点击展开 WPS 表单弹窗 -->
+          <div class="consult-card glass-card">
+            <div class="consult-badge">
+              <span class="consult-lock">🔒</span> 信息加密 · 严格保密
+            </div>
+            <h3 class="consult-title">专属顾问为您服务</h3>
+            <p class="consult-desc">填写姓名、联系方式与车辆信息，最快 30 分钟内专人响应，全程不收取任何前期费用。</p>
+            <button type="button" class="btn btn-gold btn-lg magnetic" id="openFormBtn" style="width:100%;">填写咨询表单</button>
+            <p class="consult-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
           </div>
-          <p style="font-size:var(--fs-xs);color:var(--text-muted);text-align:center;margin-top:var(--sp-sm);">
-            提交即表示您同意我们的隐私政策，我们将严格保护您的个人信息。<br>
-            <a href="https://f.kdocs.cn/g/QrfVAqFo/" target="_blank" rel="noopener" style="color:var(--c-gold);">表单无法正常显示？点此在新窗口填写 →</a>
-          </p>
+        </div>
+
+        <!-- 表单弹窗：WPS 表单在我们风格的弹窗中展开，避免突兀外链与登录暗示 -->
+        <div class="form-modal" id="formModal" aria-hidden="true">
+          <div class="form-modal-backdrop" id="formModalBackdrop"></div>
+          <div class="form-modal-panel glass-card" role="dialog" aria-modal="true" aria-label="网站留资表单">
+            <button type="button" class="form-modal-close" id="formModalClose" aria-label="关闭">×</button>
+            <h3 class="form-modal-title">网站留资 · 收集表</h3>
+            <p class="form-modal-sub">请如实填写以下信息，我们将严格保密并尽快与您联系</p>
+            <div class="wps-form-embed">
+              <iframe id="formIframe" data-src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
+            </div>
+          </div>
         </div>
 
         <!-- 地图 & 补充信息 -->

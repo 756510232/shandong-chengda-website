@@ -330,4 +330,38 @@
       link.classList.add("active");
     }
   });
+
+  /* ---------- 留资表单弹窗 ---------- */
+  const openFormBtn = document.getElementById("openFormBtn");
+  const formModal = document.getElementById("formModal");
+  const formModalBackdrop = document.getElementById("formModalBackdrop");
+  const formModalClose = document.getElementById("formModalClose");
+  const formIframe = document.getElementById("formIframe");
+
+  function openFormModal() {
+    if (!formModal || !formIframe) return;
+    if (formIframe.dataset.src && !formIframe.getAttribute("src")) {
+      formIframe.src = formIframe.dataset.src; // 点击时才加载 WPS 表单，关闭即卸载
+    }
+    formModal.classList.add("is-open");
+    formModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeFormModal() {
+    if (!formModal) return;
+    formModal.classList.remove("is-open");
+    formModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (formIframe) formIframe.removeAttribute("src"); // 卸载 WPS 表单，停止后台加载
+  }
+
+  if (openFormBtn) openFormBtn.addEventListener("click", openFormModal);
+  if (formModalClose) formModalClose.addEventListener("click", closeFormModal);
+  if (formModalBackdrop) formModalBackdrop.addEventListener("click", closeFormModal);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && formModal && formModal.classList.contains("is-open")) {
+      closeFormModal();
+    }
+  });
 })();
