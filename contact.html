@@ -105,56 +105,19 @@
           <h2 class="section-title" style="margin-bottom:var(--sp-sm)">免费评估额度</h2>
           <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">填写以下信息，专业顾问将在30分钟内与您联系</p>
 
-          <form id="contactForm" novalidate>
-            <div class="form-group">
-              <label class="form-label" for="name">姓名 <span class="required">*</span></label>
-              <input type="text" class="form-input" id="name" name="name" placeholder="请输入您的姓名">
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="phone">手机号码 <span class="required">*</span></label>
-              <input type="tel" class="form-input" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11">
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="email">电子邮箱（选填）</label>
-              <input type="email" class="form-input" id="email" name="email" placeholder="请输入您的邮箱地址">
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="carModel">车辆品牌型号（选填）</label>
-              <input type="text" class="form-input" id="carModel" name="carModel" placeholder="如：丰田凯美瑞 2021款">
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="loanAmount">期望贷款额度（选填）</label>
-              <select class="form-select" id="loanAmount" name="loanAmount">
-                <option value="">请选择期望额度</option>
-                <option value="5万以下">5万以下</option>
-                <option value="5-10万">5-10万</option>
-                <option value="10-30万">10-30万</option>
-                <option value="30-50万">30-50万</option>
-                <option value="50万以上">50万以上</option>
-              </select>
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="message">留言内容 <span class="required">*</span></label>
-              <textarea class="form-textarea" id="message" name="message" placeholder="请简要描述您的需求或问题..."></textarea>
-              <div class="form-error"></div>
-            </div>
-
-            <button type="submit" class="btn btn-gold btn-lg magnetic" style="width:100%;">提交咨询</button>
-
-            <p style="font-size:var(--fs-xs);color:var(--text-muted);text-align:center;margin-top:var(--sp-sm);">
-              提交即表示您同意我们的隐私政策，我们将严格保护您的个人信息
-            </p>
-          </form>
+          <!-- WPS 表单嵌入：访客在站内直接填写，数据进入 WPS 表格后台 -->
+          <div class="wps-form-embed">
+            <iframe
+              src="https://f.kdocs.cn/g/axaFE7mS/"
+              title="网站留资-收集表"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              frameborder="0"></iframe>
+          </div>
+          <p style="font-size:var(--fs-xs);color:var(--text-muted);text-align:center;margin-top:var(--sp-sm);">
+            提交即表示您同意我们的隐私政策，我们将严格保护您的个人信息。<br>
+            <a href="https://f.kdocs.cn/g/axaFE7mS/" target="_blank" rel="noopener" style="color:var(--c-gold);">表单无法正常显示？点此在新窗口填写 →</a>
+          </p>
         </div>
 
         <!-- 地图 & 补充信息 -->
