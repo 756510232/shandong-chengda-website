@@ -94,32 +94,34 @@
     </div>
   </section>
 
-  <!-- ===== 表单 + 地图 ===== -->
+  <!-- ===== 在线留资（页面核心） ===== -->
   <section class="section bg-section">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xl);align-items:start;" class="contact-form-grid">
 
-        <!-- 联系表单 -->
-        <div data-animate>
-          <span class="eyebrow">在线留言</span>
-          <h2 class="section-title" style="margin-bottom:var(--sp-sm)">提交您的咨询</h2>
-          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">填写以下信息，我们的专属顾问将在第一时间与您联系，信息严格保密。</p>
-
-          <!-- 留资表单：用网站风格玻璃容器包裹 WPS 表单，融入周边环境 -->
-          <div class="form-embed-wrap glass-card">
-            <div class="form-embed-head">
-              <div class="form-embed-badge">🔒 信息加密 · 严格保密</div>
-              <h3 class="form-embed-title">网站留资 · 收集表</h3>
-            </div>
-            <div class="wps-form-embed">
-              <iframe src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
-            </div>
-            <p class="form-embed-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
-          </div>
+      <!-- 留资表单：整页核心，整宽居中、直接可见、清晰可填 -->
+      <div class="contact-form-block" data-animate>
+        <div class="text-center" style="margin-bottom:var(--sp-lg);">
+          <span class="eyebrow">在线留资</span>
+          <h2 class="section-title">提交您的咨询</h2>
+          <p class="section-subtitle">填写以下信息，专属顾问将在 30 分钟内与您联系，信息全程严格保密</p>
         </div>
 
-        <!-- 地图 & 补充信息 -->
-        <div data-animate data-animate-delay="1">
+        <div class="form-embed-wrap glass-card">
+          <div class="form-embed-head">
+            <div class="form-embed-badge">🔒 信息加密 · 严格保密</div>
+            <h3 class="form-embed-title">网站留资 · 收集表</h3>
+            <p class="form-embed-tip">请在下方完整填写，带 <span style="color:var(--c-gold);font-weight:700;">*</span> 为必填项，填完点底部「提交」即可</p>
+          </div>
+          <div class="wps-form-embed">
+            <iframe src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
+          </div>
+          <p class="form-embed-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
+        </div>
+      </div>
+
+      <!-- 地图 & 补充信息（退为次要内容） -->
+      <div class="contact-secondary">
+        <div data-animate>
           <div class="card" style="padding:0;overflow:hidden;margin-bottom:var(--sp-md);">
             <div style="width:100%;height:320px;background:var(--grad-hero);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--sp-sm);position:relative;">
               <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;"></div>
@@ -152,15 +154,21 @@
               </li>
             </ul>
           </div>
+        </div>
 
-          <div class="card" style="margin-top:var(--sp-md);background:var(--grad-primary);color:#fff;border:none;">
+        <div data-animate data-animate-delay="1">
+          <div class="card" style="background:var(--grad-primary);color:#fff;border:none;height:100%;">
             <h3 style="font-size:var(--fs-lg);font-weight:700;margin-bottom:var(--sp-sm);">紧急联系</h3>
             <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);margin-bottom:var(--sp-md);">非营业时间如有紧急需求，请拨打24小时服务热线</p>
             <div style="font-size:var(--fs-2xl);font-weight:800;color:var(--c-gold);letter-spacing:0.03em;">400-888-XXXX</div>
+            <div style="margin-top:var(--sp-lg);padding-top:var(--sp-lg);border-top:1px solid rgba(255,255,255,0.15);">
+              <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);margin-bottom:var(--sp-xs);">服务时间</p>
+              <p style="font-size:var(--fs-base);color:#fff;font-weight:600;">周一至周日 8:30 - 18:00</p>
+            </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </section>
 

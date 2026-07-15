@@ -1470,7 +1470,11 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--c-gold); }
 
-/* ---------- 留资表单：网站风格玻璃容器包裹 WPS 表单 ---------- */
+/* ---------- 留资表单：页面核心，整宽居中、清晰可填 ---------- */
+.contact-form-block {
+  max-width: 880px;
+  margin: 0 auto var(--sp-2xl);
+}
 .form-embed-wrap {
   padding: var(--sp-lg);
   border: 1px solid var(--c-gold-soft);
@@ -1497,6 +1501,12 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   font-weight: 700;
   color: var(--text-primary);
 }
+.form-embed-tip {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-top: var(--sp-xs);
+  line-height: 1.6;
+}
 .form-embed-note {
   font-size: var(--fs-xs);
   color: var(--text-muted);
@@ -1507,7 +1517,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 /* ---------- WPS 表单嵌入 ---------- */
 .wps-form-embed {
   width: 100%;
-  height: 780px;
+  height: 920px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border-color);
@@ -1520,8 +1530,21 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   border: 0;
   display: block;
 }
+
+/* ---------- 补充信息（地图/到访须知/紧急联系） ---------- */
+.contact-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-xl);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contact-secondary { grid-template-columns: 1fr; }
+}
 @media (max-width: 768px) {
-  .wps-form-embed { height: 720px; }
+  .wps-form-embed { height: 860px; }
+  .contact-form-block { margin-bottom: var(--sp-xl); }
 }
 
 /* ---------- 职位说明 / 专家卡片 ---------- */
