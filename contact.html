@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 - 山东诚达信息科技有限公司</title>
+  <meta name="description" content="联系山东诚达信息科技有限公司，咨询车抵贷产品、免费评估车辆额度。电话：400-888-XXXX，地址：山东省济南市。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== 导航栏 ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">诚</div>
+        <div class="nav-logo-text">
+          <span class="main">山东诚达</span>
+          <span class="sub">CHENGDA TECHNOLOGY</span>
+        </div>
+      </a>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="about.html" class="nav-link">关于我们</a>
+        <a href="services.html" class="nav-link">产品服务</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="切换主题">
+          <span class="icon-sun">☀</span>
+          <span class="icon-moon">☾</span>
+        </button>
+        <a href="contact.html" class="btn btn-gold btn-sm magnetic">立即咨询</a>
+        <button class="nav-toggle" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu">
+    <a href="index.html" class="nav-link">首页</a>
+    <a href="about.html" class="nav-link">关于我们</a>
+    <a href="services.html" class="nav-link">产品服务</a>
+    <a href="contact.html" class="nav-link">联系我们</a>
+  </div>
+
+  <!-- ===== 页面 Hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>联系我们</h1>
+        <p>随时与我们取得联系，专业顾问为您服务</p>
+        <div class="breadcrumb">
+          <a href="index.html">首页</a> <span>/</span> <span>联系我们</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 联系信息卡片 ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-info-grid" data-animate>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📞</div>
+          <div>
+            <div class="contact-info-label">咨询热线</div>
+            <div class="contact-info-value">400-888-XXXX</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">✉</div>
+          <div>
+            <div class="contact-info-label">电子邮箱</div>
+            <div class="contact-info-value">service@chengda-tech.com</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-label">公司地址</div>
+            <div class="contact-info-value">山东省济南市XX区<br>XX路XX号诚达大厦</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🕐</div>
+          <div>
+            <div class="contact-info-label">营业时间</div>
+            <div class="contact-info-value">周一至周日<br>8:30 - 18:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 表单 + 地图 ===== -->
+  <section class="section bg-section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xl);align-items:start;" class="contact-form-grid">
+
+        <!-- 联系表单 -->
+        <div data-animate>
+          <span class="eyebrow">在线留言</span>
+          <h2 class="section-title" style="margin-bottom:var(--sp-sm)">免费评估额度</h2>
+          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">填写以下信息，专业顾问将在30分钟内与您联系</p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="name">姓名 <span class="required">*</span></label>
+              <input type="text" class="form-input" id="name" name="name" placeholder="请输入您的姓名">
+              <div class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">手机号码 <span class="required">*</span></label>
+              <input type="tel" class="form-input" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11">
+              <div class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">电子邮箱（选填）</label>
+              <input type="email" class="form-input" id="email" name="email" placeholder="请输入您的邮箱地址">
+              <div class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="carModel">车辆品牌型号（选填）</label>
+              <input type="text" class="form-input" id="carModel" name="carModel" placeholder="如：丰田凯美瑞 2021款">
+              <div class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="loanAmount">期望贷款额度（选填）</label>
+              <select class="form-select" id="loanAmount" name="loanAmount">
+                <option value="">请选择期望额度</option>
+                <option value="5万以下">5万以下</option>
+                <option value="5-10万">5-10万</option>
+                <option value="10-30万">10-30万</option>
+                <option value="30-50万">30-50万</option>
+                <option value="50万以上">50万以上</option>
+              </select>
+              <div class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">留言内容 <span class="required">*</span></label>
+              <textarea class="form-textarea" id="message" name="message" placeholder="请简要描述您的需求或问题..."></textarea>
+              <div class="form-error"></div>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-lg magnetic" style="width:100%;">提交咨询</button>
+
+            <p style="font-size:var(--fs-xs);color:var(--text-muted);text-align:center;margin-top:var(--sp-sm);">
+              提交即表示您同意我们的隐私政策，我们将严格保护您的个人信息
+            </p>
+          </form>
+        </div>
+
+        <!-- 地图 & 补充信息 -->
+        <div data-animate data-animate-delay="1">
+          <div class="card" style="padding:0;overflow:hidden;margin-bottom:var(--sp-md);">
+            <div style="width:100%;height:320px;background:var(--grad-hero);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--sp-sm);position:relative;">
+              <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-size:3rem;margin-bottom:var(--sp-sm);">📍</div>
+                <div style="color:#fff;font-size:var(--fs-lg);font-weight:700;">山东诚达信息科技有限公司</div>
+                <div style="color:rgba(255,255,255,0.6);font-size:var(--fs-sm);margin-top:var(--sp-xs);">山东省济南市XX区XX路XX号</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 style="font-size:var(--fs-lg);font-weight:700;color:var(--text-primary);margin-bottom:var(--sp-md);">到访须知</h3>
+            <ul style="display:flex;flex-direction:column;gap:var(--sp-sm);">
+              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
+                <span style="color:var(--c-gold);font-weight:700;">·</span>
+                建议提前电话预约，以便安排专属顾问接待
+              </li>
+              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
+                <span style="color:var(--c-gold);font-weight:700;">·</span>
+                到访办理请携带身份证、行驶证、车辆登记证
+              </li>
+              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
+                <span style="color:var(--c-gold);font-weight:700;">·</span>
+                市区内可提供免费上门评估服务
+              </li>
+              <li style="display:flex;gap:var(--sp-sm);font-size:var(--fs-sm);color:var(--text-body);">
+                <span style="color:var(--c-gold);font-weight:700;">·</span>
+                提供免费停车位，方便驾车到访
+              </li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:var(--sp-md);background:var(--grad-primary);color:#fff;border:none;">
+            <h3 style="font-size:var(--fs-lg);font-weight:700;margin-bottom:var(--sp-sm);">紧急联系</h3>
+            <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);margin-bottom:var(--sp-md);">非营业时间如有紧急需求，请拨打24小时服务热线</p>
+            <div style="font-size:var(--fs-2xl);font-weight:800;color:var(--c-gold);letter-spacing:0.03em;">400-888-XXXX</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 服务网点 ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" data-animate>
+        <span class="eyebrow">服务网络</span>
+        <h2 class="section-title">全省服务网点</h2>
+        <p class="section-subtitle">覆盖山东全省主要城市，就近为您服务</p>
+      </div>
+
+      <div class="feature-grid" style="margin-top:var(--sp-xl);">
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">🏢</div>
+          <h3 class="feature-title">济南总部</h3>
+          <p class="feature-desc">山东省济南市XX区XX路XX号诚达大厦<br>电话：0531-XXXXXXXX</p>
+        </div>
+        <div class="feature-card" data-animate data-animate-delay="1">
+          <div class="feature-icon">🏢</div>
+          <h3 class="feature-title">青岛分公司</h3>
+          <p class="feature-desc">山东省青岛市XX区XX路XX号<br>电话：0532-XXXXXXXX</p>
+        </div>
+        <div class="feature-card" data-animate data-animate-delay="2">
+          <div class="feature-icon">🏢</div>
+          <h3 class="feature-title">烟台分公司</h3>
+          <p class="feature-desc">山东省烟台市XX区XX路XX号<br>电话：0535-XXXXXXXX</p>
+        </div>
+        <div class="feature-card" data-animate data-animate-delay="3">
+          <div class="feature-icon">🏢</div>
+          <h3 class="feature-title">潍坊分公司</h3>
+          <p class="feature-desc">山东省潍坊市XX区XX路XX号<br>电话：0536-XXXXXXXX</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-mark">诚</div>
+            <div class="nav-logo-text">
+              <span class="main">山东诚达</span>
+              <span class="sub">CHENGDA TECHNOLOGY</span>
+            </div>
+          </a>
+          <p>山东诚达信息科技有限公司，专注于车辆抵押贷款服务，以专业、高效、透明的服务理念，为每一位客户提供优质的资金解决方案。</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速导航</h4>
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="services.html">产品服务</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>产品服务</h4>
+          <ul>
+            <li><a href="services.html">车辆一押贷款</a></li>
+            <li><a href="services.html">车辆二押贷款</a></li>
+            <li><a href="services.html">全款车抵押</a></li>
+            <li><a href="services.html">额度评估</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <div class="footer-contact-item">📞 400-888-XXXX</div>
+          <div class="footer-contact-item">✉ service@chengda-tech.com</div>
+          <div class="footer-contact-item">📍 山东省济南市XX区XX路XX号</div>
+          <div class="footer-contact-item">🕐 周一至周日 8:30-18:00</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 山东诚达信息科技有限公司 版权所有</p>
+        <div class="footer-icp">
+          <a href="#">鲁ICP备XXXXXXXX号</a>
+          <a href="#">鲁公网安备XXXXXXXXXXXXX号</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
