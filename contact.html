@@ -103,30 +103,18 @@
         <div data-animate>
           <span class="eyebrow">在线留言</span>
           <h2 class="section-title" style="margin-bottom:var(--sp-sm)">提交您的咨询</h2>
-          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">点击下方按钮，在我们的页面内安全填写留资表单，专属顾问将在第一时间与您联系。</p>
+          <p style="color:var(--text-muted);margin-bottom:var(--sp-lg);">填写以下信息，我们的专属顾问将在第一时间与您联系，信息严格保密。</p>
 
-          <!-- 引导卡片：网站自有风格，点击展开 WPS 表单弹窗 -->
-          <div class="consult-card glass-card">
-            <div class="consult-badge">
-              <span class="consult-lock">🔒</span> 信息加密 · 严格保密
+          <!-- 留资表单：用网站风格玻璃容器包裹 WPS 表单，融入周边环境 -->
+          <div class="form-embed-wrap glass-card">
+            <div class="form-embed-head">
+              <div class="form-embed-badge">🔒 信息加密 · 严格保密</div>
+              <h3 class="form-embed-title">网站留资 · 收集表</h3>
             </div>
-            <h3 class="consult-title">专属顾问为您服务</h3>
-            <p class="consult-desc">填写姓名、联系方式与车辆信息，最快 30 分钟内专人响应，全程不收取任何前期费用。</p>
-            <button type="button" class="btn btn-gold btn-lg magnetic" id="openFormBtn" style="width:100%;">填写咨询表单</button>
-            <p class="consult-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
-          </div>
-        </div>
-
-        <!-- 表单弹窗：WPS 表单在我们风格的弹窗中展开，避免突兀外链与登录暗示 -->
-        <div class="form-modal" id="formModal" aria-hidden="true">
-          <div class="form-modal-backdrop" id="formModalBackdrop"></div>
-          <div class="form-modal-panel glass-card" role="dialog" aria-modal="true" aria-label="网站留资表单">
-            <button type="button" class="form-modal-close" id="formModalClose" aria-label="关闭">×</button>
-            <h3 class="form-modal-title">网站留资 · 收集表</h3>
-            <p class="form-modal-sub">请如实填写以下信息，我们将严格保密并尽快与您联系</p>
             <div class="wps-form-embed">
-              <iframe id="formIframe" data-src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
+              <iframe src="https://f.kdocs.cn/g/QrfVAqFo/" title="网站留资-收集表" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0"></iframe>
             </div>
+            <p class="form-embed-note">表单由金山文档提供技术支持，提交后数据直接进入我们的留资后台</p>
           </div>
         </div>
 
