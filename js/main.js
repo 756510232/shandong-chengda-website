@@ -330,4 +330,11 @@
       link.classList.add("active");
     }
   });
+
+  /* ---------- 动态版权年份（避免页脚年份过期） ---------- */
+  const yearEls = document.querySelectorAll(".footer-bottom p");
+  const currentYear = new Date().getFullYear();
+  yearEls.forEach(function (el) {
+    el.textContent = el.textContent.replace(/©\s*\d{4}/, "© " + currentYear);
+  });
 })();
