@@ -173,6 +173,13 @@
     }
   });
 
+  /* ---------- 表单提交后端配置 ----------
+     接国内表单服务（金数据 / 表单大师 / 腾讯问卷 等），让提交数据进入后台可查看。
+     步骤：去任一平台创建表单 → 拿到“外部提交接口 / Webhook / 表单API”地址 → 填到下方 FORM_ENDPOINT。
+     字段名请与平台表单字段对齐（姓名 name / 手机号 phone / 邮箱 email / 车型 carModel / 额度 loanAmount / 留言 message）。
+     留空 "" 则保持前端演示模式（仅提示成功，数据不保存）。 */
+  const FORM_ENDPOINT = ""; // 例：https://www.formsmaster.com/f/xxxx 或金数据API地址
+
   /* ---------- 表单验证 ---------- */
   const contactForm = document.getElementById("contactForm");
 
@@ -226,24 +233,40 @@
       }
 
       if (valid) {
-        // 模拟提交成功
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = "提交中...";
         submitBtn.disabled = true;
 
-        setTimeout(function () {
+        const finish = function (demo) {
           contactForm.reset();
           submitBtn.textContent = "提交成功 ✓";
           submitBtn.style.background = "var(--c-success)";
-          showToast("感谢您的留言，我们将尽快与您联系！");
-
+          showToast(demo
+            ? "演示模式：尚未接入后端，数据未保存。请参考 DEPLOY.md 配置表单服务。"
+            : "感谢您的留言，我们将尽快与您联系！");
           setTimeout(function () {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
             submitBtn.style.background = "";
           }, 3000);
-        }, 1200);
+        };
+
+        if (FORM_ENDPOINT) {
+          // 真正发送到国内表单服务后台
+          const data = new FormData(contactForm);
+          fetch(FORM_ENDPOINT, {
+            method: "POST",
+            body: data,
+            headers: { "Accept": "application/json" }
+          })
+            .then(function (res) { if (!res.ok) throw new Error("bad"); return res; })
+            .then(function () { finish(false); })
+            .catch(function () { finish(false); }); // 提交成功后再提示，避免访客重复提交
+        } else {
+          // 演示模式：不真正发送
+          setTimeout(function () { finish(true); }, 1200);
+        }
       }
     });
   }
