@@ -286,7 +286,7 @@
     if (!toast) {
       toast = document.createElement("div");
       toast.className = "toast";
-      toast.style.css =
+      toast.style.cssText =
         "position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);" +
         "background:var(--c-primary);color:#fff;padding:1rem 2rem;border-radius:12px;" +
         "font-size:0.95rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.2);" +
