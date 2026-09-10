@@ -1362,8 +1362,11 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 
 .footer-icp {
   display: flex;
+  justify-content: center;
   gap: var(--sp-md);
   flex-wrap: wrap;
+  margin-top: var(--sp-sm);
+  text-align: center;
 }
 
 .footer-icp a {
