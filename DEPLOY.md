@@ -61,3 +61,36 @@ GitHub Pages 适合长期免费展示，但国内访问偏慢、非品牌域名�
 - ⚠️ 消除「登录提示」：若访客在 WPS 表单中看到要求登录，请在 **WPS 表单后台 → 该收集表设置 → 填写权限** 改为「所有人可填写（无需登录）」。此提示来自 WPS 表单自身设置，与网站代码无关
 - 数据合规：WPS（金山）为国内服务，数据存于国内，符合车抵贷客户个人信息合规要求
 - 兼容处理：`js/main.js` 中原有的 `FORM_ENDPOINT` 前端提交逻辑因表单元素已移除而自动跳过，无需改动
+
+
+---
+
+## 八、国内服务器部署（方案③ · 已落地 2026-09-11）
+
+官网已额外部署到自有阿里云服务器，与「车惠融 AI 对接平台」共存、互不影响。
+
+### 访问地址
+| 类型 | 地址 |
+|---|---|
+| **官网（当前）** | http://106.14.224.121/chengda/ |
+| 官网独立端口（需在阿里云安全组放行 8085） | http://106.14.224.121:8085/ |
+| 车惠融平台（原有，未改动逻辑） | http://106.14.224.121/ |
+
+### 服务器上的结构
+- 站点文件：`/opt/chengda-website/www/`（index/about/services/contact + css/js/assets）
+- 承载容器：`chengda-web`（nginx:1.27-alpine，`/opt/chengda-website/docker-compose.yml`）
+- 接入方式：复用现有 `ai-finance-nginx`（80 端口），新增 `location /chengda/` 反代到 `chengda-web`
+- 原配置备份：`/opt/ai-finance/nginx/nginx.conf.bak-<时间戳>`
+- 已预留独立域名 server 块（`server_name chengda.example.com`），绑定域名后改写该行即可
+
+### 绑定独立域名的步骤
+1. DNS 把域名 A 记录解析到 `106.14.224.121`
+2. 把 `/opt/ai-finance/nginx/nginx.conf` 中 `server_name chengda.example.com;` 改成真实域名
+3. `docker exec ai-finance-nginx nginx -t && docker exec ai-finance-nginx nginx -s reload`
+
+### 更新官网内容的步骤
+```bash
+# 本地改完后，把 www 目录同步到服务器
+scp -r index.html about.html services.html contact.html css js assets root@106.14.224.121:/opt/chengda-website/www/
+```
+（静态文件无需重启容器，浏览器强刷即可看到更新）
