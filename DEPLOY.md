@@ -124,3 +124,33 @@ scp -r index.html about.html services.html contact.html css js assets root@106.1
 3. 之后执行：certbot（webroot，镜像已就绪）+ chengda-web 监听 443 + 80→443 跳转
 
 > 概念：80=HTTP 明文；443=HTTPS 加密。生产环境标准做法是 443 承接流量、80 只做 301 跳转。
+
+---
+
+## 十、方案 B 落地：官网与车惠融彻底隔离 + HTTPS 全站（2026-09-11）
+
+### 最终架构
+| 服务 | 地址 | 容器 | 端口 |
+|---|---|---|---|
+| **官网** | https://aidaikuan.cn （www 同） | `chengda-web` (nginx:1.27) | 80 / 443 |
+| **车惠融 AI 平台** | https://aidaikuan.cn:8086 | `ai-finance-nginx` + `ai-finance-app` | 8086 |
+| HTTP 80 | 全部 301 跳转 HTTPS | — | — |
+
+### HTTPS
+- Let's Encrypt 证书：`aidaikuan.cn` + `www.aidaikuan.cn`，有效期至 2026-12-09，自动续期
+- 证书目录：`/opt/chengda-website/certbot/conf`（已挂载进两个 nginx 容器）
+- 续期脚本：`/opt/chengda-website/renew-cert.sh`，cron `/etc/cron.d/chengda-renew`（每天 03:17 检查并热重载）
+- 官网安全头：HSTS / X-Content-Type-Options / X-Frame-Options / Referrer-Policy / Permissions-Policy / CSP
+
+### 车惠融迁移要点
+- 由 `80` 迁到 `8086`（`-p 8086:443`，容器内监听 443 ssl），**app 代码未改动**
+- `config/config.json` 的 `app.public_base_url` 已改为 `https://aidaikuan.cn:8086`（客户填单链接来源）
+- app 容器启动参数增加 `--forwarded-allow-ips=*`，nginx `Host $http_host`，使 `request.base_url` 生成 `https://aidaikuan.cn:8086/...`
+- 部署脚本 `scripts/deploy-standalone.sh` 已同步更新（含新端口 + 证书挂载 + uvicorn 参数）
+
+### 旧链接兼容（重要）
+原来发给客户/晴晴的 `http://106.14.224.121/form?token=...`、`/tap/check` 等，官网 nginx 已配置 301 自动跳转到 `https://aidaikuan.cn:8086/...`，**老链接不会失效**。
+
+### 运维提醒
+1. **改 `/opt/ai-finance/nginx/nginx.conf` 或 `/opt/chengda-website/nginx.conf` 时，务必用 `cat > 文件`（原地写入）而非 `sed -i`/scp 覆盖**——bind mount 绑定的是 inode，替换文件会让容器继续读旧内容（本次已踩坑）。
+2. 车惠融后台 `/admin` 有口令登录，现已 HTTPS；建议再加 IP 白名单。
