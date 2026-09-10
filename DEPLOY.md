@@ -94,3 +94,33 @@ GitHub Pages 适合长期免费展示，但国内访问偏慢、非品牌域名�
 scp -r index.html about.html services.html contact.html css js assets root@106.14.224.121:/opt/chengda-website/www/
 ```
 （静态文件无需重启容器，浏览器强刷即可看到更新）
+
+---
+
+## 九、备案信息 / 域名 / HTTPS（2026-09-11 更新）
+
+### 已接入的备案信息（4 个页面页脚底部居中）
+- **ICP 备案**：`鲁ICP备2026051648号-1` → 链接 `https://beian.miit.gov.cn`
+- **公安备案**：`鲁公网安备37010302001862号` → 链接 `https://beian.mps.gov.cn/#/query/webSearch?code=37010302001862`
+
+### 隐私清理（按需求）
+- 全站移除：客服电话 `13188878975`、总部座机 `0531-XXXXXXXX`、地址「济南市天桥区鑫福盛大厦620室」
+- 删除整块「全省服务网点」（济南总部 + 青岛/烟台/潍坊/临沂/菏泽分公司，实际并不存在）
+- 联系页信息块只保留「电子邮箱 + 服务时间」；「到访须知/紧急联系」改为「办理须知/服务保障」
+
+### SEO / 收录优化
+- 每页新增：`canonical`、Open Graph 分享标签（含自动生成的 `assets/og-image.jpg` 1200×630 分享图）、`twitter:card`
+- 新增 `robots.txt`、`sitemap.xml`
+- 上线后建议：把 `https://aidaikuan.cn/sitemap.xml` 提交到百度搜索资源平台与 Google Search Console
+
+### 域名与架构
+- **官网域名**：`aidaikuan.cn` / `www.aidaikuan.cn` → 官网（nginx 按 `server_name` 分流）
+- **车惠融平台**：仍走 IP 默认虚拟主机，逻辑零改动
+- 官网新增安全响应头：`X-Content-Type-Options` / `X-Frame-Options` / `Referrer-Policy` / `Permissions-Policy` / `CSP`（放行金山表单 iframe）
+
+### HTTPS 待办（需用户在阿里云控制台操作）
+1. **DNS**：`aidaikuan.cn`、`www.aidaikuan.cn` A 记录 → `106.14.224.121`
+2. **安全组放行 443**（建议同时放行 8086 备用）
+3. 之后执行：certbot（webroot，镜像已就绪）+ chengda-web 监听 443 + 80→443 跳转
+
+> 概念：80=HTTP 明文；443=HTTPS 加密。生产环境标准做法是 443 承接流量、80 只做 301 跳转。
