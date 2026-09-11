@@ -154,3 +154,6 @@ scp -r index.html about.html services.html contact.html css js assets root@106.1
 ### 运维提醒
 1. **改 `/opt/ai-finance/nginx/nginx.conf` 或 `/opt/chengda-website/nginx.conf` 时，务必用 `cat > 文件`（原地写入）而非 `sed -i`/scp 覆盖**——bind mount 绑定的是 inode，替换文件会让容器继续读旧内容（本次已踩坑）。
 2. 车惠融后台 `/admin` 有口令登录，现已 HTTPS；建议再加 IP 白名单。
+## 缓存说明
+
+- `css/style.css` 与 `js/main.js` 默认带 7 天缓存，修改样式或脚本后，需要同步更新各 HTML 中的 `?v=YYYYMMDD` 版本号，例如 `style.css?v=20260911c`，否则浏览器可能继续使用旧缓存。
