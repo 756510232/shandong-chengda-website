@@ -1,78 +1,68 @@
 /* ==========================================================================
-   山东诚达信息科技有限公司 - 交互脚本
+   山东诚达信息科技有限公司 · 交互脚本
+   保留：导航、滚动动画、数字滚动、FAQ、计算器
    ========================================================================== */
 
 (function () {
   "use strict";
 
-  /* ---------- 主题切换 ---------- */
-  const themeToggle = document.querySelector(".theme-toggle");
-  const root = document.documentElement;
-
-  function getPreferredTheme() {
-    const stored = localStorage.getItem("cd-theme");
-    if (stored) return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  function applyTheme(theme) {
-    root.setAttribute("data-theme", theme);
-    localStorage.setItem("cd-theme", theme);
-  }
-
-  applyTheme(getPreferredTheme());
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      const current = root.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
-    });
-  }
-
-  /* ---------- 导航栏滚动效果 ---------- */
-  const navbar = document.querySelector(".navbar");
-  let lastScroll = 0;
+  /* ---------- 导航栏滚动 ---------- */
+  var header = document.querySelector(".site-header");
 
   function handleNavScroll() {
-    const scrollY = window.scrollY;
-    if (navbar) {
-      if (scrollY > 10) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-    }
-    lastScroll = scrollY;
+    if (!header) return;
+    header.classList.toggle("scrolled", window.scrollY > 8);
   }
 
   window.addEventListener("scroll", handleNavScroll, { passive: true });
   handleNavScroll();
 
   /* ---------- 移动端菜单 ---------- */
-  const navToggle = document.querySelector(".nav-toggle");
-  const mobileMenu = document.querySelector(".mobile-menu");
+  var navToggle = document.querySelector(".nav-toggle");
+  var mobileMenu = document.querySelector(".mobile-menu");
+
+  function closeMobileMenu() {
+    if (!navToggle || !mobileMenu) return;
+    navToggle.classList.remove("active");
+    mobileMenu.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
 
   if (navToggle && mobileMenu) {
     navToggle.addEventListener("click", function () {
-      navToggle.classList.toggle("active");
-      mobileMenu.classList.toggle("open");
-      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+      var willOpen = !mobileMenu.classList.contains("open");
+      navToggle.classList.toggle("active", willOpen);
+      mobileMenu.classList.toggle("open", willOpen);
+      navToggle.setAttribute("aria-expanded", String(willOpen));
+      document.body.style.overflow = willOpen ? "hidden" : "";
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 900) closeMobileMenu();
     });
 
     mobileMenu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navToggle.classList.remove("active");
-        mobileMenu.classList.remove("open");
-        document.body.style.overflow = "";
-      });
+      link.addEventListener("click", closeMobileMenu);
     });
   }
 
+  /* ---------- 当前页面高亮 ---------- */
+  var currentPage = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav-links a, .mobile-menu a").forEach(function (link) {
+    var href = link.getAttribute("href") || "";
+    var hrefPage = href.split("#")[0].split("/").pop();
+    if (hrefPage === currentPage) {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    }
+  });
+
   /* ---------- 滚动入场动画 ---------- */
-  const animateElements = document.querySelectorAll("[data-animate]");
+  var animateElements = document.querySelectorAll("[data-animate]");
 
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
+    var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -81,49 +71,42 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-
-    animateElements.forEach(function (el) {
-      observer.observe(el);
-    });
+    animateElements.forEach(function (el) { observer.observe(el); });
   } else {
-    animateElements.forEach(function (el) {
-      el.classList.add("in-view");
-    });
+    animateElements.forEach(function (el) { el.classList.add("in-view"); });
   }
 
-  /* ---------- 数字滚动动画 ---------- */
-  const counters = document.querySelectorAll("[data-count]");
-  let countersAnimated = false;
+  /* ---------- 数字滚动 ---------- */
+  var counters = document.querySelectorAll("[data-count]");
+  var countersAnimated = false;
 
   function animateCounters() {
-    if (countersAnimated) return;
-    const counterSection = document.querySelector("[data-count-section]");
+    if (countersAnimated || !counters.length) return;
+    var counterSection = document.querySelector("[data-count-section]");
     if (!counterSection) return;
 
-    const rect = counterSection.getBoundingClientRect();
+    var rect = counterSection.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       countersAnimated = true;
       counters.forEach(function (el) {
-        const target = parseFloat(el.getAttribute("data-count"));
-        const decimals = parseInt(el.getAttribute("data-decimals") || "0");
-        const duration = 2000;
-        const startTime = performance.now();
+        var target = parseFloat(el.getAttribute("data-count"));
+        var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+        var duration = 1200;
+        var start = performance.now();
 
         function update(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = (target * eased).toFixed(decimals);
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = target * eased;
           el.textContent = Number(current).toLocaleString("zh-CN", {
             minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals,
+            maximumFractionDigits: decimals
           });
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          }
+          if (progress < 1) requestAnimationFrame(update);
         }
+
         requestAnimationFrame(update);
       });
     }
@@ -131,210 +114,174 @@
 
   window.addEventListener("scroll", animateCounters, { passive: true });
   window.addEventListener("load", animateCounters);
-
-  /* ---------- 磁吸按钮效果 ---------- */
-  const magneticElements = document.querySelectorAll(".magnetic");
-
-  magneticElements.forEach(function (el) {
-    el.addEventListener("mousemove", function (e) {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = "translate(" + x * 0.15 + "px, " + y * 0.15 + "px)";
-    });
-
-    el.addEventListener("mouseleave", function () {
-      el.style.transform = "";
-    });
-  });
+  animateCounters();
 
   /* ---------- FAQ 手风琴 ---------- */
-  const faqItems = document.querySelectorAll(".faq-item");
+  document.querySelectorAll(".faq-item").forEach(function (item) {
+    var question = item.querySelector(".faq-question");
+    var answer = item.querySelector(".faq-answer");
+    if (!question || !answer) return;
 
-  faqItems.forEach(function (item) {
-    const question = item.querySelector(".faq-question");
-    const answer = item.querySelector(".faq-answer");
+    question.addEventListener("click", function () {
+      var isActive = item.classList.contains("active");
 
-    if (question && answer) {
-      question.addEventListener("click", function () {
-        const isActive = item.classList.contains("active");
-
-        faqItems.forEach(function (other) {
-          other.classList.remove("active");
-          const otherAnswer = other.querySelector(".faq-answer");
-          if (otherAnswer) otherAnswer.style.maxHeight = null;
-        });
-
-        if (!isActive) {
-          item.classList.add("active");
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        }
+      document.querySelectorAll(".faq-item").forEach(function (other) {
+        other.classList.remove("active");
+        var otherAnswer = other.querySelector(".faq-answer");
+        if (otherAnswer) otherAnswer.style.maxHeight = null;
+        var otherQuestion = other.querySelector(".faq-question");
+        if (otherQuestion) otherQuestion.setAttribute("aria-expanded", "false");
       });
-    }
+
+      if (!isActive) {
+        item.classList.add("active");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        question.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    question.setAttribute("aria-expanded", "false");
   });
-
-  /* ---------- 表单提交后端配置 ----------
-     接国内表单服务（金数据 / 表单大师 / 腾讯问卷 等），让提交数据进入后台可查看。
-     步骤：去任一平台创建表单 → 拿到“外部提交接口 / Webhook / 表单API”地址 → 填到下方 FORM_ENDPOINT。
-     字段名请与平台表单字段对齐（姓名 name / 手机号 phone / 邮箱 email / 车型 carModel / 额度 loanAmount / 留言 message）。
-     留空 "" 则保持前端演示模式（仅提示成功，数据不保存）。 */
-  const FORM_ENDPOINT = ""; // 例：https://www.formsmaster.com/f/xxxx 或金数据API地址
-
-  /* ---------- 表单验证 ---------- */
-  const contactForm = document.getElementById("contactForm");
-
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      let valid = true;
-
-      // 清除之前的错误
-      contactForm.querySelectorAll(".form-error").forEach(function (el) {
-        el.classList.remove("show");
-      });
-      contactForm.querySelectorAll(".error").forEach(function (el) {
-        el.classList.remove("error");
-      });
-
-      // 验证姓名
-      const name = contactForm.querySelector("#name");
-      if (name && !name.value.trim()) {
-        showError(name, "请输入您的姓名");
-        valid = false;
-      }
-
-      // 验证手机号
-      const phone = contactForm.querySelector("#phone");
-      if (phone) {
-        const phoneVal = phone.value.trim();
-        if (!phoneVal) {
-          showError(phone, "请输入手机号码");
-          valid = false;
-        } else if (!/^1[3-9]\d{9}$/.test(phoneVal)) {
-          showError(phone, "请输入正确的手机号码");
-          valid = false;
-        }
-      }
-
-      // 验证邮箱（选填时也要格式正确）
-      const email = contactForm.querySelector("#email");
-      if (email && email.value.trim()) {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-          showError(email, "请输入正确的邮箱地址");
-          valid = false;
-        }
-      }
-
-      // 验证留言
-      const message = contactForm.querySelector("#message");
-      if (message && !message.value.trim()) {
-        showError(message, "请输入留言内容");
-        valid = false;
-      }
-
-      if (valid) {
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = "提交中...";
-        submitBtn.disabled = true;
-
-        const finish = function (demo) {
-          contactForm.reset();
-          submitBtn.textContent = "提交成功 ✓";
-          submitBtn.style.background = "var(--c-success)";
-          showToast(demo
-            ? "演示模式：尚未接入后端，数据未保存。请参考 DEPLOY.md 配置表单服务。"
-            : "感谢您的留言，我们将尽快与您联系！");
-          setTimeout(function () {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            submitBtn.style.background = "";
-          }, 3000);
-        };
-
-        if (FORM_ENDPOINT) {
-          // 真正发送到国内表单服务后台
-          const data = new FormData(contactForm);
-          fetch(FORM_ENDPOINT, {
-            method: "POST",
-            body: data,
-            headers: { "Accept": "application/json" }
-          })
-            .then(function (res) { if (!res.ok) throw new Error("bad"); return res; })
-            .then(function () { finish(false); })
-            .catch(function () { finish(false); }); // 提交成功后再提示，避免访客重复提交
-        } else {
-          // 演示模式：不真正发送
-          setTimeout(function () { finish(true); }, 1200);
-        }
-      }
-    });
-  }
-
-  function showError(input, message) {
-    input.classList.add("error");
-    const errorEl = input.parentElement.querySelector(".form-error");
-    if (errorEl) {
-      errorEl.textContent = message;
-      errorEl.classList.add("show");
-    }
-  }
-
-  /* ---------- Toast 提示 ---------- */
-  function showToast(message) {
-    let toast = document.querySelector(".toast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.className = "toast";
-      toast.style.cssText =
-        "position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);" +
-        "background:var(--c-primary);color:#fff;padding:1rem 2rem;border-radius:12px;" +
-        "font-size:0.95rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.2);" +
-        "z-index:9999;opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);" +
-        "max-width:90vw;text-align:center;";
-      document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-
-    requestAnimationFrame(function () {
-      toast.style.opacity = "1";
-      toast.style.transform = "translateX(-50%) translateY(0)";
-    });
-
-    setTimeout(function () {
-      toast.style.opacity = "0";
-      toast.style.transform = "translateX(-50%) translateY(100px)";
-    }, 3500);
-  }
 
   /* ---------- 平滑滚动到锚点 ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        const navHeight = navbar ? navbar.offsetHeight : 0;
-        const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-        window.scrollTo({ top: top, behavior: "smooth" });
-      }
+      var targetId = this.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+      var target = document.querySelector(targetId);
+      if (!target) return;
+      e.preventDefault();
+      var headerHeight = header ? header.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+      window.scrollTo({ top: top, behavior: "smooth" });
     });
   });
 
-  /* ---------- 当前页面高亮导航 ---------- */
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".nav-link").forEach(function (link) {
-    const href = link.getAttribute("href");
-    if (href === currentPage || (currentPage === "" && href === "index.html")) {
-      link.classList.add("active");
+  /* ---------- 车抵贷费用计算器 ---------- */
+  var calculator = document.getElementById("loanCalculator");
+  if (calculator) {
+    var amountInput = document.getElementById("calcAmount");
+    var termInput = document.getElementById("calcTerm");
+    var rateSelect = document.getElementById("calcRate");
+    var methodSelect = document.getElementById("calcMethod");
+
+    var monthlyOut = document.getElementById("calcMonthly");
+    var monthlyLabel = document.getElementById("calcMonthlyLabel");
+    var annualOut = document.getElementById("calcAnnual");
+    var interestOut = document.getElementById("calcInterest");
+    var totalOut = document.getElementById("calcTotal");
+    var rateLabel = document.getElementById("calcRateLabel");
+    var scheduleBody = document.getElementById("calcScheduleBody");
+
+    function money(value) {
+      return Number(value).toLocaleString("zh-CN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
     }
+
+    function percent(value) {
+      return (value * 100).toFixed(2) + "%";
+    }
+
+    function renderSchedule(principal, monthlyRate, periods, method) {
+      if (!scheduleBody) return;
+      var rows = [];
+      var balance = principal;
+
+      if (method === "equal-payment") {
+        var monthly = principal * monthlyRate * Math.pow(1 + monthlyRate, periods) /
+          (Math.pow(1 + monthlyRate, periods) - 1);
+        for (var i = 1; i <= periods; i++) {
+          var interest = balance * monthlyRate;
+          var principalPart = monthly - interest;
+          balance = Math.max(0, balance - principalPart);
+          rows.push([i, monthly, principalPart, interest, balance]);
+        }
+      } else {
+        var principalPart = principal / periods;
+        for (var j = 1; j <= periods; j++) {
+          var monthInterest = balance * monthlyRate;
+          var payment = principalPart + monthInterest;
+          balance = Math.max(0, balance - principalPart);
+          rows.push([j, payment, principalPart, monthInterest, balance]);
+        }
+      }
+
+      scheduleBody.innerHTML = rows.map(function (row) {
+        return "<tr>" +
+          "<td>" + row[0] + "</td>" +
+          "<td>¥" + money(row[1]) + "</td>" +
+          "<td>¥" + money(row[2]) + "</td>" +
+          "<td>¥" + money(row[3]) + "</td>" +
+          "<td>¥" + money(row[4]) + "</td>" +
+          "</tr>";
+      }).join("");
+    }
+
+    function calculate() {
+      var amountWan = parseFloat(amountInput.value);
+      var periods = parseInt(termInput.value, 10);
+      var monthlyRate = parseFloat(rateSelect.value);
+      var method = methodSelect.value;
+
+      if (!amountWan || amountWan <= 0) amountWan = 10;
+      if (!periods || periods < 1) periods = 24;
+      if (!monthlyRate) monthlyRate = 0.0068;
+
+      amountInput.value = amountWan;
+      termInput.value = periods;
+
+      var principal = amountWan * 10000;
+      var annualNominal = monthlyRate * 12;
+      var monthlyPayment;
+      var totalInterest;
+      var totalRepayment;
+      var description;
+
+      if (method === "equal-payment") {
+        monthlyPayment = principal * monthlyRate * Math.pow(1 + monthlyRate, periods) /
+          (Math.pow(1 + monthlyRate, periods) - 1);
+        totalRepayment = monthlyPayment * periods;
+        totalInterest = totalRepayment - principal;
+        description = "等额本息 · 每月还款固定";
+        monthlyLabel.textContent = "每月还款";
+      } else {
+        var principalPart = principal / periods;
+        monthlyPayment = principalPart + principal * monthlyRate;
+        totalInterest = principal * monthlyRate * (periods + 1) / 2;
+        totalRepayment = principal + totalInterest;
+        description = "等额本金 · 首月最高，逐月递减";
+        monthlyLabel.textContent = "首月还款";
+      }
+
+      monthlyOut.textContent = "¥" + money(monthlyPayment);
+      annualOut.textContent = percent(annualNominal);
+      interestOut.textContent = "¥" + money(totalInterest);
+      totalOut.textContent = "¥" + money(totalRepayment);
+      rateLabel.textContent = percent(monthlyRate).replace("%", "") + "% / 月";
+      document.getElementById("calcMethodLabel").textContent = description;
+      document.getElementById("calcPrincipalLabel").textContent = "¥" + money(principal);
+      document.getElementById("calcTermLabel").textContent = periods + " 期";
+
+      renderSchedule(principal, monthlyRate, periods, method);
+    }
+
+    [amountInput, termInput, rateSelect, methodSelect].forEach(function (el) {
+      el.addEventListener("input", calculate);
+      el.addEventListener("change", calculate);
+    });
+
+    var calcBtn = document.getElementById("calcBtn");
+    if (calcBtn) calcBtn.addEventListener("click", calculate);
+
+    calculate();
+  }
+
+  /* ---------- 动态版权年份 ---------- */
+  var year = new Date().getFullYear();
+  document.querySelectorAll(".js-year").forEach(function (el) {
+    el.textContent = String(year);
   });
 
-  /* ---------- 动态版权年份（避免页脚年份过期） ---------- */
-  const yearEls = document.querySelectorAll(".footer-bottom p");
-  const currentYear = new Date().getFullYear();
-  yearEls.forEach(function (el) {
-    el.textContent = el.textContent.replace(/©\s*\d{4}/, "© " + currentYear);
-  });
 })();
